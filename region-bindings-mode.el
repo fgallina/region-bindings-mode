@@ -82,3 +82,12 @@ Don't use this, use `region-bindings-mode-disable'."
   (remove-hook 'activate-mark-hook 'region-bindings-mode-on)
   (remove-hook 'deactivate-mark-hook 'region-bindings-mode-off)
   (region-bindings-mode -1))
+
+(provide 'region-bindings-mode)
+
+;; Local Variables:
+;; coding: utf-8
+;; indent-tabs-mode: nil
+;; End:
+
+;;; region-bindings-mode.el ends here
