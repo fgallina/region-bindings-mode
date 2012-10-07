@@ -48,15 +48,36 @@
 ;; And as you would expect that will trigger a `keyboard-quit' when
 ;; pressing g, but this only happens when region is active.
 
+;; You can have fine grained control on the situations where this mode
+;; should not be enabled, the first is using the simple
+;; `region-bindings-mode-disabled-modes' variable and the other is
+;; using `region-bindings-mode-disable-predicates'.  This is just a
+;; list of functions that receive no args and if any of them return
+;; non-nil the mode is not enabled.
+
 ;; If you want to disable the mode completely, please use
 ;; `region-bindings-mode-disable'.
 
 ;;; Code:
 
+(defgroup region-bindings-mode nil
+  "Indenting and region-bindings-modeing text."
+  :group 'region-bindings-mode)
+
 (defvar region-bindings-mode-map
   (let ((region-bindings-mode-map (make-sparse-keymap)))
     region-bindings-mode-map)
   "Keymaps for command `region-bindings-mode-map'.")
+
+(defcustom region-bindings-mode-disable-predicates nil
+  "List of predicates that disable the mode.
+Each function in the list receive no argument."
+  :group 'region-bindings-mode)
+
+(defcustom region-bindings-mode-disabled-modes nil
+  "Modes where `region-bindings-mode' should not activate."
+  :group 'region-bindings-mode
+  :type '(repeat symbol))
 
 (define-minor-mode region-bindings-mode
   "Enable special bindings when working with regions."
@@ -65,7 +86,12 @@
 (defun region-bindings-mode-on ()
   "Turn on region bindings mode.
 Don't use this, use `region-bindings-mode-enable'."
-  (region-bindings-mode 1))
+  (and (not (memq major-mode region-bindings-mode-disabled-modes))
+       (not (catch 'disable
+              (dolist (pred region-bindings-mode-disable-predicates)
+                (and (funcall pred)
+                     (throw 'disable t)))))
+       (region-bindings-mode 1)))
 
 (defun region-bindings-mode-off ()
   "Turn off region bindings mode.
