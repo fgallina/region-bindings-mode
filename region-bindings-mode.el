@@ -1,11 +1,12 @@
 ;;; region-bindings-mode.el --- Enable custom bindings when mark is active.
 
 ;; Copyright (C) 2012  Fabián E. Gallina
-
 ;; Author: Fabián E. Gallina <fabian@anue.biz>
+
 ;; URL: https://github.com/fgallina/region-bindings-mode
-;; Version: 0.1
 ;; Created: Oct 2012
+;; Package-Version: 1.0
+;; Package-Requires: ()
 ;; Keywords: convenience
 
 ;; This file is NOT part of GNU Emacs.
@@ -26,9 +27,12 @@
 
 ;;; Commentary:
 
-;; Minor mode that enables the ability of having a custom keys for
-;; working with regions.  This is a pretty good way to keep the global
-;; bindings clean.
+;; Minor mode providing an extra keymap which is active when the
+;; region is active. You can then add custom keybindings to the region
+;; keymap, e.g. you could set "k" to call the command 'kill-region'
+;; when the region is active.
+
+;; This is a pretty good way to keep the global bindings clean.
 
 ;;; Installation:
 
