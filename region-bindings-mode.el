@@ -1,4 +1,4 @@
-;;; region-bindings-mode --- Enable custom bindings when mark is active.
+;;; region-bindings-mode.el --- Enable custom bindings when mark is active.
 
 ;; Copyright (C) 2012  Fabián E. Gallina
 
@@ -37,6 +37,12 @@
 ;; (add-to-list 'load-path "/folder/containing/file")
 ;; (require 'region-bindings-mode)
 ;; (region-bindings-mode-enable)
+
+;; Alternatively, you can install this easily via MELPA through the
+;; Emacs package manager. To add MELPA to the package archives:
+
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;;; Usage:
 
@@ -79,6 +85,7 @@ Each function in the list receive no argument."
   :group 'region-bindings-mode
   :type '(repeat symbol))
 
+;;;###autoload
 (define-minor-mode region-bindings-mode
   "Enable special bindings when working with regions."
   :lighter " rk" :group 'convenience)
