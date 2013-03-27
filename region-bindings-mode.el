@@ -51,7 +51,7 @@
 ;;; Usage:
 
 ;; Now that region-bindings-mode has been installed and initialized
-;; all you need to do is to add keys to it, here's and example:
+;; all you need to do is to add keys to it, here's an example:
 
 ;; (define-key region-bindings-mode-map "g" 'keyboard-quit)
 
@@ -91,7 +91,22 @@ Each function in the list receive no argument."
 
 ;;;###autoload
 (define-minor-mode region-bindings-mode
-  "Enable special bindings when working with regions."
+  "Enable special bindings when working with an active region.
+
+Examples of use:
+
+Insert the following code somewhere in your load path.
+
+\(define-key region-bindings-mode-map \"k\" 'kill-region)
+\(define-key region-bindings-mode-map \"r\" 'replace-regexp)
+
+Now pressing \"k\" while the region is active will kill the
+selected region and yank it to your kill-ring. Pressing \"r\"
+will query for a regexp substitution within the active region.
+
+There are many useful region commands that can be made more
+convenient to use through this keymap, such as
+'narrow-to-region', 'apply-macro-to-region-lines', etc."
   :lighter " rk" :group 'convenience)
 
 (defun region-bindings-mode-on ()
