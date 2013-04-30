@@ -1,4 +1,4 @@
-;;; region-bindings-mode --- Enable custom bindings when mark is active.
+;;; region-bindings-mode.el --- Enable custom bindings when mark is active.
 
 ;; Copyright (C) 2012  Fabián E. Gallina
 
