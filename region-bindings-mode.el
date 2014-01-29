@@ -61,8 +61,8 @@
 ;;; Code:
 
 (defgroup region-bindings-mode nil
-  "Indenting and region-bindings-modeing text."
-  :group 'region-bindings-mode)
+  "Provide a dedicated keymap for use when the region is active."
+  :group 'convenience)
 
 (defvar region-bindings-mode-map
   (let ((region-bindings-mode-map (make-sparse-keymap)))
