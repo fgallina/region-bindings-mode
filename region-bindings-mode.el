@@ -41,7 +41,7 @@
 ;;; Usage:
 
 ;; Now that region-bindings-mode has been installed and initialized
-;; all you need to do is to add keys to it, here's and example:
+;; all you need to do is to add keys to it, here's an example:
 
 ;; (define-key region-bindings-mode-map "g" 'keyboard-quit)
 
