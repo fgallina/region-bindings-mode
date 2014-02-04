@@ -80,7 +80,19 @@ Each function in the list receive no argument."
   :type '(repeat symbol))
 
 (define-minor-mode region-bindings-mode
-  "Enable special bindings when working with regions."
+  "Enable special bindings for working with regions.
+
+Do not invoke `region-bindings-mode' directly!
+
+Toggling the mode on and off via this function will simply
+enable/disable the bindings, but it will not honour
+`region-bindings-mode-disabled-modes' or
+`region-bindings-mode-disable-predicates', or toggle activation
+of the hooks which automatically enable/disable the bindings when
+the mark is activated or deactivated.
+
+Instead, call `region-bindings-mode-enable' and
+`region-bindings-mode-enable'."
   :lighter " rk" :group 'convenience)
 
 (defun region-bindings-mode-on ()
