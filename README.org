@@ -41,6 +41,18 @@ This package contains region-bindings-mode.el
   (define-key region-bindings-mode-map "m" 'mc/mark-more-like-this-extended)
   #+END_EXAMPLE
 
+  In this use case, you would probably want these bindings to work
+  within specific scenarios.  For example, =multiple-cursors= doesn't
+  make much sense in read-only buffers.  You could prevent
+  =region-bindings-mode= in these by setting
+  =region-bindings-mode-disable-predicates= to:
+
+  #+BEGIN_EXAMPLE
+  ((lambda () buffer-read-only))
+  #+END_EXAMPLE
+
+  You can also exclude specific modes via =region-bindings-mode-disabled-modes=.
+
 * Bug Reports
 
   If you find a bug please report it sending an email listed in the
