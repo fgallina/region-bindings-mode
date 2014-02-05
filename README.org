@@ -51,7 +51,8 @@ This package contains region-bindings-mode.el
   ((lambda () buffer-read-only))
   #+END_EXAMPLE
 
-  You can also exclude specific modes via =region-bindings-mode-disabled-modes=.
+  You can also exclude specific modes via =region-bindings-mode-disabled-modes=,
+  or specify a white-list of allowed modes via =region-bindings-mode-enabled-modes=.
 
 * Bug Reports
 
