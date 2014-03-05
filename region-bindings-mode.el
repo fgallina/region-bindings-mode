@@ -75,12 +75,16 @@ Each function in the list receive no argument."
   :group 'region-bindings-mode)
 
 (defcustom region-bindings-mode-enabled-modes nil
-  "Modes where `region-bindings-mode' should activate."
+  "Modes where `region-bindings-mode' should activate.
+Each value should correspond to the value of the `major-mode'
+variable within the respective mode."
   :group 'region-bindings-mode
   :type '(repeat symbol))
 
 (defcustom region-bindings-mode-disabled-modes nil
-  "Modes where `region-bindings-mode' should not activate."
+  "Modes where `region-bindings-mode' should not activate.
+Each value should correspond to the value of the `major-mode'
+variable within the respective mode."
   :group 'region-bindings-mode
   :type '(repeat symbol))
 
