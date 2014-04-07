@@ -1,11 +1,12 @@
 ;;; region-bindings-mode.el --- Enable custom bindings when mark is active.
 
 ;; Copyright (C) 2012  Fabián E. Gallina
-
 ;; Author: Fabián E. Gallina <fabian@anue.biz>
+
 ;; URL: https://github.com/fgallina/region-bindings-mode
-;; Version: 0.1
 ;; Created: Oct 2012
+;; Package-Version: 1.0
+;; Package-Requires: ()
 ;; Keywords: convenience
 
 ;; This file is NOT part of GNU Emacs.
@@ -26,9 +27,12 @@
 
 ;;; Commentary:
 
-;; Minor mode that enables the ability of having a custom keys for
-;; working with regions.  This is a pretty good way to keep the global
-;; bindings clean.
+;; Minor mode providing an extra keymap which is active when the
+;; region is active. You can then add custom keybindings to the region
+;; keymap, e.g. you could set "k" to call the command 'kill-region'
+;; when the region is active.
+
+;; This is a pretty good way to keep the global bindings clean.
 
 ;;; Installation:
 
@@ -38,10 +42,16 @@
 ;; (require 'region-bindings-mode)
 ;; (region-bindings-mode-enable)
 
+;; Alternatively, you can install this easily via MELPA through the
+;; Emacs package manager. To add MELPA to the package archives:
+
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 ;;; Usage:
 
 ;; Now that region-bindings-mode has been installed and initialized
-;; all you need to do is to add keys to it, here's and example:
+;; all you need to do is to add keys to it, here's an example:
 
 ;; (define-key region-bindings-mode-map "g" 'keyboard-quit)
 
@@ -79,8 +89,24 @@ Each function in the list receive no argument."
   :group 'region-bindings-mode
   :type '(repeat symbol))
 
+;;;###autoload
 (define-minor-mode region-bindings-mode
-  "Enable special bindings when working with regions."
+  "Enable special bindings when working with an active region.
+
+Examples of use:
+
+Insert the following code somewhere in your load path.
+
+\(define-key region-bindings-mode-map \"k\" 'kill-region)
+\(define-key region-bindings-mode-map \"r\" 'replace-regexp)
+
+Now pressing \"k\" while the region is active will kill the
+selected region and yank it to your kill-ring. Pressing \"r\"
+will query for a regexp substitution within the active region.
+
+There are many useful region commands that can be made more
+convenient to use through this keymap, such as
+'narrow-to-region', 'apply-macro-to-region-lines', etc."
   :lighter " rk" :group 'convenience)
 
 (defun region-bindings-mode-on ()
