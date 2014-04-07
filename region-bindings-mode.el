@@ -96,8 +96,17 @@
 Each function in the list receive no argument."
   :group 'region-bindings-mode)
 
+(defcustom region-bindings-mode-enabled-modes nil
+  "Modes where `region-bindings-mode' should activate.
+Each value should correspond to the value of the `major-mode'
+variable within the respective mode."
+  :group 'region-bindings-mode
+  :type '(repeat symbol))
+
 (defcustom region-bindings-mode-disabled-modes nil
-  "Modes where `region-bindings-mode' should not activate."
+  "Modes where `region-bindings-mode' should not activate.
+Each value should correspond to the value of the `major-mode'
+variable within the respective mode."
   :group 'region-bindings-mode
   :type '(repeat symbol))
 
@@ -121,7 +130,9 @@ Instead, call `region-bindings-mode-enable' and
 (defun region-bindings-mode-on ()
   "Turn on region bindings mode.
 Don't use this, use `region-bindings-mode-enable'."
-  (and (not (memq major-mode region-bindings-mode-disabled-modes))
+  (and (or (not region-bindings-mode-enabled-modes)
+           (memq major-mode region-bindings-mode-enabled-modes))
+       (not (memq major-mode region-bindings-mode-disabled-modes))
        (not (catch 'disable
               (dolist (pred region-bindings-mode-disable-predicates)
                 (and (funcall pred)
