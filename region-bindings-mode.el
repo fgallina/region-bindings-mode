@@ -143,11 +143,13 @@ To permanently turn off region bindings mode, instead use
 
 (defun region-bindings-mode-enable ()
   "Add initialization hooks."
+  (interactive)
   (add-hook 'activate-mark-hook 'region-bindings-mode-on)
   (add-hook 'deactivate-mark-hook 'region-bindings-mode-off))
 
 (defun region-bindings-mode-disable ()
   "Remove initialization hooks and turn off."
+  (interactive)
   (remove-hook 'activate-mark-hook 'region-bindings-mode-on)
   (remove-hook 'deactivate-mark-hook 'region-bindings-mode-off)
   (region-bindings-mode -1))
