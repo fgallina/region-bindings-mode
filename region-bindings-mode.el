@@ -58,6 +58,18 @@
 ;; And as you would expect that will trigger a `keyboard-quit' when
 ;; pressing g, but this only happens when region is active.
 
+;; If any of the bindings you define in region-bindings-mode-map leave
+;; a region active (e.g. the various marking commands in
+;; multiple-cursors) then you will probably want a binding which
+;; temporarily disables region-bindings-mode for the currently active
+;; region, so that you can type normally once you are finished using
+;; the region-only bindings.  This can be achieved via:
+
+;; (define-key region-bindings-mode-map "q" 'region-bindings-mode-off)
+
+;; Then after pressing "q", the per-region bindings can be easily
+;; reactivated by redefining or changing the active region.
+
 ;; You can have fine grained control on the situations where this mode
 ;; should not be enabled, the first is using the simple
 ;; `region-bindings-mode-disabled-modes' variable and the other is
@@ -120,8 +132,13 @@ Don't use this, use `region-bindings-mode-enable'."
        (region-bindings-mode 1)))
 
 (defun region-bindings-mode-off ()
-  "Turn off region bindings mode.
-Don't use this, use `region-bindings-mode-disable'."
+  "Temporarily turn off region bindings mode.  It is useful to
+bind this to a key in `region-bindings-mode-map' to temporarily
+disable region bindings when the region is active.
+
+To permanently turn off region bindings mode, instead use
+`region-bindings-mode-disable'."
+  (interactive)
   (region-bindings-mode -1))
 
 (defun region-bindings-mode-enable ()
