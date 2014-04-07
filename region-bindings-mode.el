@@ -105,20 +105,17 @@ Each function in the list receive no argument."
 (define-minor-mode region-bindings-mode
   "Enable special bindings when working with an active region.
 
-Examples of use:
+Do not invoke `region-bindings-mode' directly!
 
-Insert the following code somewhere in your load path.
+Toggling the mode on and off via this function will simply
+enable/disable the bindings, but it will not honour
+`region-bindings-mode-disabled-modes' or
+`region-bindings-mode-disable-predicates', or toggle activation
+of the hooks which automatically enable/disable the bindings when
+the mark is activated or deactivated.
 
-\(define-key region-bindings-mode-map \"k\" 'kill-region)
-\(define-key region-bindings-mode-map \"r\" 'replace-regexp)
-
-Now pressing \"k\" while the region is active will kill the
-selected region and yank it to your kill-ring. Pressing \"r\"
-will query for a regexp substitution within the active region.
-
-There are many useful region commands that can be made more
-convenient to use through this keymap, such as
-'narrow-to-region', 'apply-macro-to-region-lines', etc."
+Instead, call `region-bindings-mode-enable' and
+`region-bindings-mode-enable'."
   :lighter " rk" :group 'convenience)
 
 (defun region-bindings-mode-on ()
