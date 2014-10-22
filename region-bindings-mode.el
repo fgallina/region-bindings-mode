@@ -143,6 +143,7 @@ Instead, call `region-bindings-mode-enable' and
 Don't use this, use `region-bindings-mode-enable'."
   (if (region-bindings-mode-should-be-enabled-p)
       (progn
+        (setq overriding-terminal-local-map region-bindings-mode-map)
         (region-bindings-mode 1))
     (region-bindings-mode-off)))
 
@@ -154,6 +155,7 @@ disable region bindings when the region is active.
 To permanently turn off region bindings mode, instead use
 `region-bindings-mode-disable'."
   (interactive)
+  (setq overriding-terminal-local-map nil)
   (region-bindings-mode -1))
 
 (defun region-bindings-mode-enable ()
