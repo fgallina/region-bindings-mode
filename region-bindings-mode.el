@@ -127,17 +127,24 @@ Instead, call `region-bindings-mode-enable' and
 `region-bindings-mode-enable'."
   :lighter " rk" :group 'convenience)
 
-(defun region-bindings-mode-on ()
-  "Turn on region bindings mode.
-Don't use this, use `region-bindings-mode-enable'."
-  (and (or (not region-bindings-mode-enabled-modes)
+(defun region-bindings-mode-should-be-enabled-p ()
+  "Returns t if region-bindings-mode should be enabled, nil otherwise."
+  (and (region-active-p)
+       (or (not region-bindings-mode-enabled-modes)
            (memq major-mode region-bindings-mode-enabled-modes))
        (not (memq major-mode region-bindings-mode-disabled-modes))
        (not (catch 'disable
               (dolist (pred region-bindings-mode-disable-predicates)
                 (and (funcall pred)
-                     (throw 'disable t)))))
-       (region-bindings-mode 1)))
+                     (throw 'disable t)))))))
+
+(defun region-bindings-mode-on ()
+  "Turn on region bindings mode.
+Don't use this, use `region-bindings-mode-enable'."
+  (if (region-bindings-mode-should-be-enabled-p)
+      (progn
+        (region-bindings-mode 1))
+    (region-bindings-mode-off)))
 
 (defun region-bindings-mode-off ()
   "Temporarily turn off region bindings mode.  It is useful to
