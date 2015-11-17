@@ -124,7 +124,7 @@ of the hooks which automatically enable/disable the bindings when
 the mark is activated or deactivated.
 
 Instead, call `region-bindings-mode-enable' and
-`region-bindings-mode-enable'."
+`region-bindings-mode-disable'."
   :lighter " rk" :group 'convenience)
 
 (defun region-bindings-mode-on ()
